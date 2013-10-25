@@ -1,0 +1,120 @@
+﻿@model BusinessObject.ManageLogin
+
+@{
+    ViewBag.Title = "Login";
+}
+@using (@Html.BeginForm("Login", "User", FormMethod.Post))
+{
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="shortcut icon" href="icon/favicon.png">
+
+        <title>Advantexe</title>
+
+        <!-- CSS -->
+        <link href="~/Content/Styles/content/shared/styles/examples-offline.css" rel="stylesheet" />
+        <link href="~/Content/Styles/styles/kendo.common.min.css" rel="stylesheet" />
+        <link href="~/Content/Styles/styles/kendo.rtl.min.css" rel="stylesheet" />
+        <link href="~/Content/Styles/styles/kendo.default.min.css" rel="stylesheet" />
+        <link href="~/Content/Styles/styles/font-awesome-ie7.min.css" rel="stylesheet" />
+        <!--[if IE 7]>
+          <link rel="stylesheet" href="styles/font-awesome-ie7.min.css">
+        <![endif]-->
+
+
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+        <!-- Custom styles for this template -->
+        <link href="~/Content/Styles/styles/custom.css" rel="stylesheet" />
+    </head>
+
+    <body>
+        <div id="content-login" class="k-content">
+            <!-- Fixed navbar -->
+            <div class="navbar navbar-default navbar-fixed-top">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">
+                        <img src="~/Content/Styles/images/logo.png" border="0" alt="Advertexe" longdesc="index.html"></a>
+                    <h4 class="pull-right">Virtual Learning Environment</h4>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+
+            <div class="container">
+                <!-- Page -->
+
+                <form action="#" method="post" class="specialdivlogin" id="loginbox">
+                    <div class="loginbox">
+                        <table width="382" border="0" cellspacing="7" cellpadding="0" align="center">
+                            <tbody>
+                                <tr>
+                                    <td id="inputtxt">
+
+                                        @Html.TextBoxFor(m => m.UserName, new { data_bind = "value: Name", @class = "k-textbox", @type = "text", @placeholder = "Username", @id = "UserName", @name = "UserName", })
+                                        <span class="field-validation-valid" data-valmsg-for="UserName" data-valmsg-replace="true"></span>
+
+                                    </td>
+                                </tr>
+                                 <tr>
+                                    <td>
+                                        @Html.ValidationMessageFor(m => m.UserName)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td id="inputpassword">
+                                        @Html.TextBoxFor(m => m.Password, new { data_bind = "value: Name", @class = "k-textbox", @type = "password", @placeholder = "Password", @id = "Password", @name = "Password", })
+                                        <span class="field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+                                    </td>
+                                </tr>
+                                 <tr>
+                                    <td>
+                                        @Html.ValidationMessageFor(m => m.Password)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="submit" value="Get Inside" title="Get Inside" class="loginnewbtn k-button" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="100%" class="links_forgot"><a href="#">Forgot id?</a> <a href="#">Forgot Password?</a></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @ViewData["Msg"]
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+            <!-- /container -->
+
+        </div>
+        <!-- /wrapper -->
+        <div style="clear: both"></div>
+
+        <div class="footer">
+            <p>Copyright &copy; Adventexe.com</p>
+        </div>
+
+        <!-- core JavaScript
+    ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="~/Content/Styles/js/jquery.min.js"></script>
+        <script src="~/Content/Styles/js/kendo.web.min.js"></script>
+        <script src="~/Content/Styles/js/custom.js"></script>
+        <script src="~/Content/Styles/content/shared/js/console.js"></script>
+    </body>
+    </html> 
+}

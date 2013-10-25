@@ -1,0 +1,621 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="AdvantexeVLEModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="AdvantexeVLEModelStoreContainer">
+          <EntitySet Name="Client" EntityType="AdvantexeVLEModel.Store.Client" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Group" EntityType="AdvantexeVLEModel.Store.Group" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Module" EntityType="AdvantexeVLEModel.Store.Module" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ModuleType" EntityType="AdvantexeVLEModel.Store.ModuleType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Role" EntityType="AdvantexeVLEModel.Store.Role" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="RoleGroupPermissions" EntityType="AdvantexeVLEModel.Store.RoleGroupPermissions" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sysdiagrams" EntityType="AdvantexeVLEModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="User" EntityType="AdvantexeVLEModel.Store.User" store:Type="Tables" store:Schema="dbo" store:Name="User">
+            <DefiningQuery>SELECT 
+      [User].[UserID] AS [UserID], 
+      [User].[UserName] AS [UserName], 
+      [User].[FirstName] AS [FirstName], 
+      [User].[MiddleName] AS [MiddleName], 
+      [User].[LastName] AS [LastName], 
+      [User].[EmailID] AS [EmailID], 
+      [User].[Gender] AS [Gender], 
+      [User].[Password] AS [Password], 
+      [User].[IsActive] AS [IsActive], 
+      [User].[RoleID] AS [RoleID], 
+      [User].[CreatedBy] AS [CreatedBy], 
+      [User].[CreateDate] AS [CreateDate], 
+      [User].[ModifiedBy] AS [ModifiedBy], 
+      [User].[ModifiedDate] AS [ModifiedDate], 
+      [User].[Phone] AS [Phone], 
+      [User].[City] AS [City], 
+      [User].[Address] AS [Address], 
+      [User].[GroupID] AS [GroupID]
+      FROM [dbo].[User] AS [User]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Group__ClientID" Association="AdvantexeVLEModel.Store.FK__Group__ClientID">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Group" EntitySet="Group" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Module__ModuleType" Association="AdvantexeVLEModel.Store.FK__Module__ModuleType">
+            <End Role="ModuleType" EntitySet="ModuleType" />
+            <End Role="Module" EntitySet="Module" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RoleGroup__Module" Association="AdvantexeVLEModel.Store.FK__RoleGroup__Module">
+            <End Role="Module" EntitySet="Module" />
+            <End Role="RoleGroupPermissions" EntitySet="RoleGroupPermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RoleGroup__Role" Association="AdvantexeVLEModel.Store.FK__RoleGroup__Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="RoleGroupPermissions" EntitySet="RoleGroupPermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User__RoleID" Association="AdvantexeVLEModel.Store.FK__User__RoleID">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_GroupID" Association="AdvantexeVLEModel.Store.FK_User_GroupID">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="ClientID" Type="smallint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ClientName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+          <Property Name="ClientFirstName" Type="nvarchar" MaxLength="100" />
+          <Property Name="ClientMiddleName" Type="nvarchar" MaxLength="100" />
+          <Property Name="ClientLastName" Type="nvarchar" MaxLength="100" />
+          <Property Name="ClientEmailAddress" Type="nvarchar" MaxLength="100" />
+          <Property Name="Phone" Type="varchar" MaxLength="15" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="GroupID" />
+          </Key>
+          <Property Name="GroupID" Type="smallint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+          <Property Name="ClientID" Type="smallint" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Module">
+          <Key>
+            <PropertyRef Name="ModuleID" />
+          </Key>
+          <Property Name="ModuleID" Type="smallint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
+          <Property Name="Link" Type="nvarchar" MaxLength="250" />
+          <Property Name="ModuleTypeID" Type="tinyint" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ModuleType">
+          <Key>
+            <PropertyRef Name="ModuleTypeID" />
+          </Key>
+          <Property Name="ModuleTypeID" Type="tinyint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="tinyint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="RoleGroupPermissions">
+          <Key>
+            <PropertyRef Name="RoleGroupPermissionID" />
+          </Key>
+          <Property Name="RoleGroupPermissionID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RoleID" Type="tinyint" />
+          <Property Name="GroupID" Type="tinyint" />
+          <Property Name="ModuleID" Type="smallint" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'AdvantexeVLE.dbo.User' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="100" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="100" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" />
+          <Property Name="EmailID" Type="nvarchar" MaxLength="100" />
+          <Property Name="Gender" Type="tinyint" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="RoleID" Type="tinyint" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="Phone" Type="varchar" MaxLength="15" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="1000" />
+          <Property Name="GroupID" Type="smallint" />
+        </EntityType>
+        <Association Name="FK__Group__ClientID">
+          <End Role="Client" Type="AdvantexeVLEModel.Store.Client" Multiplicity="0..1" />
+          <End Role="Group" Type="AdvantexeVLEModel.Store.Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="Group">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Module__ModuleType">
+          <End Role="ModuleType" Type="AdvantexeVLEModel.Store.ModuleType" Multiplicity="0..1" />
+          <End Role="Module" Type="AdvantexeVLEModel.Store.Module" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModuleType">
+              <PropertyRef Name="ModuleTypeID" />
+            </Principal>
+            <Dependent Role="Module">
+              <PropertyRef Name="ModuleTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RoleGroup__Module">
+          <End Role="Module" Type="AdvantexeVLEModel.Store.Module" Multiplicity="0..1" />
+          <End Role="RoleGroupPermissions" Type="AdvantexeVLEModel.Store.RoleGroupPermissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="ModuleID" />
+            </Principal>
+            <Dependent Role="RoleGroupPermissions">
+              <PropertyRef Name="ModuleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RoleGroup__Role">
+          <End Role="Role" Type="AdvantexeVLEModel.Store.Role" Multiplicity="0..1" />
+          <End Role="RoleGroupPermissions" Type="AdvantexeVLEModel.Store.RoleGroupPermissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="RoleGroupPermissions">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User__RoleID">
+          <End Role="Role" Type="AdvantexeVLEModel.Store.Role" Multiplicity="0..1" />
+          <End Role="User" Type="AdvantexeVLEModel.Store.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_GroupID">
+          <End Role="Group" Type="AdvantexeVLEModel.Store.Group" Multiplicity="0..1" />
+          <End Role="User" Type="AdvantexeVLEModel.Store.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="GroupID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AdvantexeVLEModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="AdvantexeEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Clients" EntityType="AdvantexeVLEModel.Client" />
+          <EntitySet Name="Groups" EntityType="AdvantexeVLEModel.Group" />
+          <EntitySet Name="Modules" EntityType="AdvantexeVLEModel.Module" />
+          <EntitySet Name="ModuleTypes" EntityType="AdvantexeVLEModel.ModuleType" />
+          <EntitySet Name="Roles" EntityType="AdvantexeVLEModel.Role" />
+          <EntitySet Name="RoleGroupPermissions" EntityType="AdvantexeVLEModel.RoleGroupPermission" />
+          <EntitySet Name="sysdiagrams" EntityType="AdvantexeVLEModel.sysdiagram" />
+          <EntitySet Name="Users" EntityType="AdvantexeVLEModel.User" />
+          <AssociationSet Name="FK__Group__ClientID" Association="AdvantexeVLEModel.FK__Group__ClientID">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Group" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_GroupID" Association="AdvantexeVLEModel.FK_User_GroupID">
+            <End Role="Group" EntitySet="Groups" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Module__ModuleType" Association="AdvantexeVLEModel.FK__Module__ModuleType">
+            <End Role="ModuleType" EntitySet="ModuleTypes" />
+            <End Role="Module" EntitySet="Modules" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RoleGroup__Module" Association="AdvantexeVLEModel.FK__RoleGroup__Module">
+            <End Role="Module" EntitySet="Modules" />
+            <End Role="RoleGroupPermissions" EntitySet="RoleGroupPermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RoleGroup__Role" Association="AdvantexeVLEModel.FK__RoleGroup__Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="RoleGroupPermissions" EntitySet="RoleGroupPermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User__RoleID" Association="AdvantexeVLEModel.FK__User__RoleID">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="ClientID" Type="Int16" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
+          <Property Name="ClientFirstName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="ClientMiddleName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="ClientLastName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="ClientEmailAddress" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Phone" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Groups" Relationship="AdvantexeVLEModel.FK__Group__ClientID" FromRole="Client" ToRole="Group" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="GroupID" />
+          </Key>
+          <Property Name="GroupID" Type="Int16" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
+          <Property Name="ClientID" Type="Int16" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Client" Relationship="AdvantexeVLEModel.FK__Group__ClientID" FromRole="Group" ToRole="Client" />
+          <NavigationProperty Name="Users" Relationship="AdvantexeVLEModel.FK_User_GroupID" FromRole="Group" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Module">
+          <Key>
+            <PropertyRef Name="ModuleID" />
+          </Key>
+          <Property Name="ModuleID" Type="Int16" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="Link" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="ModuleTypeID" Type="Byte" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ModuleType" Relationship="AdvantexeVLEModel.FK__Module__ModuleType" FromRole="Module" ToRole="ModuleType" />
+          <NavigationProperty Name="RoleGroupPermissions" Relationship="AdvantexeVLEModel.FK__RoleGroup__Module" FromRole="Module" ToRole="RoleGroupPermissions" />
+        </EntityType>
+        <EntityType Name="ModuleType">
+          <Key>
+            <PropertyRef Name="ModuleTypeID" />
+          </Key>
+          <Property Name="ModuleTypeID" Type="Byte" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Modules" Relationship="AdvantexeVLEModel.FK__Module__ModuleType" FromRole="ModuleType" ToRole="Module" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Byte" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="RoleGroupPermissions" Relationship="AdvantexeVLEModel.FK__RoleGroup__Role" FromRole="Role" ToRole="RoleGroupPermissions" />
+          <NavigationProperty Name="Users" Relationship="AdvantexeVLEModel.FK__User__RoleID" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="RoleGroupPermission">
+          <Key>
+            <PropertyRef Name="RoleGroupPermissionID" />
+          </Key>
+          <Property Name="RoleGroupPermissionID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleID" Type="Byte" />
+          <Property Name="GroupID" Type="Byte" />
+          <Property Name="ModuleID" Type="Int16" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Module" Relationship="AdvantexeVLEModel.FK__RoleGroup__Module" FromRole="RoleGroupPermissions" ToRole="Module" />
+          <NavigationProperty Name="Role" Relationship="AdvantexeVLEModel.FK__RoleGroup__Role" FromRole="RoleGroupPermissions" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="FirstName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="LastName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="EmailID" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Gender" Type="Byte" />
+          <Property Name="Password" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="RoleID" Type="Byte" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="Phone" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="City" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Address" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
+          <Property Name="GroupID" Type="Int16" />
+          <NavigationProperty Name="Group" Relationship="AdvantexeVLEModel.FK_User_GroupID" FromRole="User" ToRole="Group" />
+          <NavigationProperty Name="Role" Relationship="AdvantexeVLEModel.FK__User__RoleID" FromRole="User" ToRole="Role" />
+        </EntityType>
+        <Association Name="FK__Group__ClientID">
+          <End Role="Client" Type="AdvantexeVLEModel.Client" Multiplicity="0..1" />
+          <End Role="Group" Type="AdvantexeVLEModel.Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="Group">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_GroupID">
+          <End Role="Group" Type="AdvantexeVLEModel.Group" Multiplicity="0..1" />
+          <End Role="User" Type="AdvantexeVLEModel.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="GroupID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Module__ModuleType">
+          <End Role="ModuleType" Type="AdvantexeVLEModel.ModuleType" Multiplicity="0..1" />
+          <End Role="Module" Type="AdvantexeVLEModel.Module" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModuleType">
+              <PropertyRef Name="ModuleTypeID" />
+            </Principal>
+            <Dependent Role="Module">
+              <PropertyRef Name="ModuleTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RoleGroup__Module">
+          <End Role="Module" Type="AdvantexeVLEModel.Module" Multiplicity="0..1" />
+          <End Role="RoleGroupPermissions" Type="AdvantexeVLEModel.RoleGroupPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="ModuleID" />
+            </Principal>
+            <Dependent Role="RoleGroupPermissions">
+              <PropertyRef Name="ModuleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RoleGroup__Role">
+          <End Role="Role" Type="AdvantexeVLEModel.Role" Multiplicity="0..1" />
+          <End Role="RoleGroupPermissions" Type="AdvantexeVLEModel.RoleGroupPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="RoleGroupPermissions">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User__RoleID">
+          <End Role="Role" Type="AdvantexeVLEModel.Role" Multiplicity="0..1" />
+          <End Role="User" Type="AdvantexeVLEModel.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AdvantexeVLEModelStoreContainer" CdmEntityContainer="AdvantexeEntities">
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="AdvantexeVLEModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ClientFirstName" ColumnName="ClientFirstName" />
+                <ScalarProperty Name="ClientMiddleName" ColumnName="ClientMiddleName" />
+                <ScalarProperty Name="ClientLastName" ColumnName="ClientLastName" />
+                <ScalarProperty Name="ClientEmailAddress" ColumnName="ClientEmailAddress" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="AdvantexeVLEModel.Group">
+              <MappingFragment StoreEntitySet="Group">
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Modules">
+            <EntityTypeMapping TypeName="AdvantexeVLEModel.Module">
+              <MappingFragment StoreEntitySet="Module">
+                <ScalarProperty Name="ModuleID" ColumnName="ModuleID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="ModuleTypeID" ColumnName="ModuleTypeID" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ModuleTypes">
+            <EntityTypeMapping TypeName="AdvantexeVLEModel.ModuleType">
+              <MappingFragment StoreEntitySet="ModuleType">
+                <ScalarProperty Name="ModuleTypeID" ColumnName="ModuleTypeID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="AdvantexeVLEModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoleGroupPermissions">
+            <EntityTypeMapping TypeName="AdvantexeVLEModel.RoleGroupPermission">
+              <MappingFragment StoreEntitySet="RoleGroupPermissions">
+                <ScalarProperty Name="RoleGroupPermissionID" ColumnName="RoleGroupPermissionID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="ModuleID" ColumnName="ModuleID" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="AdvantexeVLEModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="AdvantexeVLEModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
